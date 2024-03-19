@@ -1,0 +1,28 @@
+{
+    "name": "weeding",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "cz": "git add . && git-cz",
+        "cl": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro check && astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.5.9",
+        "astro": "^4.5.5",
+        "commitizen": "^4.3.0",
+        "conventional-changelog": "^5.1.0",
+        "conventional-changelog-cli": "^4.1.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "typescript": "^5.4.2"
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
+    }
+}
