@@ -1,0 +1,10 @@
+---
+import {Umami} from 'astro-analytics';
+import { ANALYTICS } from '~/utils/config';
+---
+
+{
+    ANALYTICS?.vendors?.umami?.id ? (
+      <Umami dataId={String(ANALYTICS.vendors.umami.id)} host={ANALYTICS.vendors.umami.url} site='/script.js' />
+    ) : null
+  }

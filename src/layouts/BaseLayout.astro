@@ -1,0 +1,34 @@
+---
+import Favicons from '~/components/Favicons.astro';
+import CustomStyles from '~/components/CustomStyles.astro';
+
+import Analytics from '~/components/common/Analytics.astro';
+import CommonMeta from '~/components/common/CommonMeta.astro';
+
+import { I18N } from '~/utils/config';
+const { language, textDirection } = I18N;
+---
+
+<!doctype html>
+<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+  <head>
+    <CommonMeta />
+    <Favicons />
+    <CustomStyles />
+    <Analytics />
+
+    <!-- Uncomment line below to activate View Transitions -->
+    <!-- <ViewTransitions fallback="swap" /> -->
+  </head>
+
+  <body class="antialiased text-default bg-page tracking-tight">
+    <slot />
+
+
+    <style is:global>
+      img {
+        content-visibility: auto;
+      }
+    </style>
+  </body>
+</html>
