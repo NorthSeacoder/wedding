@@ -5,6 +5,6 @@ import { ANALYTICS } from '~/utils/config';
 
 {
     ANALYTICS?.vendors?.umami?.id ? (
-      <Umami dataId={String(ANALYTICS.vendors.umami.id)} host={ANALYTICS.vendors.umami.url} site='/script.js' />
+      <Umami dataId={String(ANALYTICS.vendors.umami.id)} site={ANALYTICS.vendors.umami.url} host='/script.js' />
     ) : null
   }
