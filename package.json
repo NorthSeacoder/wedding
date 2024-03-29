@@ -13,13 +13,20 @@
     },
     "devDependencies": {
         "@astrojs/check": "^0.5.9",
+        "@astrojs/tailwind": "^5.1.0",
+        "@iconify-json/flat-color-icons": "^1.1.10",
+        "@iconify-json/tabler": "^1.1.109",
+        "@tailwindcss/typography": "^0.5.12",
         "astro": "^4.5.5",
+        "clsx": "^2.1.0",
         "commitizen": "^4.3.0",
         "conventional-changelog": "^5.1.0",
         "conventional-changelog-cli": "^4.1.0",
         "cz-conventional-changelog": "^3.3.0",
         "js-yaml": "^4.1.0",
         "lodash.merge": "^4.6.2",
+        "tailwind-merge": "^2.2.2",
+        "tailwindcss": "^3.4.1",
         "typescript": "^5.4.2"
     },
     "config": {
@@ -28,13 +35,13 @@
         }
     },
     "dependencies": {
-        "@astrojs/tailwind": "^5.1.0",
+        "@astrojs/sitemap": "^3.1.2",
         "@astrolib/seo": "1.0.0-beta.5",
         "@fontsource-variable/inter": "^5.0.17",
         "@types/js-yaml": "^4.0.9",
         "@types/lodash.merge": "^4.6.9",
         "astro-analytics": "^2.7.0",
-        "limax": "^4.1.0",
-        "tailwindcss": "^3.4.1"
+        "astro-icon": "^1.1.0",
+        "limax": "^4.1.0"
     }
 }

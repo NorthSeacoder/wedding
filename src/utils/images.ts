@@ -55,7 +55,7 @@ export const adaptOpenGraphImages = async (
   if (!openGraph?.images?.length) {
     return openGraph;
   }
-
+  console.log("adaptOpenGraphImages",{openGraph,astroSite})
   const images = openGraph.images;
   const defaultWidth = 1200;
   const defaultHeight = 626;

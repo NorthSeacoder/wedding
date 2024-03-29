@@ -1,9 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+const metadata = {
+  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  ignoreTitleTemplate: true,
+};
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout metadata={metadata}>
 	<main>
 		<svg
 			class="astro-a"
