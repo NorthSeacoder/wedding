@@ -1,10 +1,9 @@
 ---
-import {Umami} from 'astro-analytics';
 import { ANALYTICS } from '~/utils/config';
 ---
 
 {
     ANALYTICS?.vendors?.umami?.id ? (
-      <Umami dataId={String(ANALYTICS.vendors.umami.id)} site={ANALYTICS.vendors.umami.url} host='/script.js' />
+      <script defer src={ANALYTICS.vendors.umami.url} data-website-id={ANALYTICS.vendors.umami.id}></script>
     ) : null
   }

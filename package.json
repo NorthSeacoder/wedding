@@ -40,7 +40,6 @@
         "@fontsource-variable/inter": "^5.0.17",
         "@types/js-yaml": "^4.0.9",
         "@types/lodash.merge": "^4.6.9",
-        "astro-analytics": "^2.7.0",
         "astro-icon": "^1.1.0",
         "limax": "^4.1.0"
     }

@@ -35,7 +35,7 @@ analytics:
   vendors:
     umami:
       id: "82bb9ef9-bd79-4aba-a11e-66d0e5c55f8f"
-      url: "https://umami.mengpeng.tech"
+      url: "https://umami.mengpeng.tech/script.js"
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
 
