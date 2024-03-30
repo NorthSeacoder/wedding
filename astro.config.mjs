@@ -6,7 +6,7 @@ import icon from 'astro-icon';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-import {ANALYTICS, SITE} from './src/utils/config.ts';
+import {SITE} from './src/utils/config.ts';
 import tasks from './src/utils/tasks';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

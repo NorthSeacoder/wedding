@@ -4,6 +4,6 @@ import { ANALYTICS } from '~/utils/config';
 
 {
     ANALYTICS?.vendors?.umami?.id ? (
-      <script defer src={ANALYTICS.vendors.umami.url} data-website-id={ANALYTICS.vendors.umami.id}></script>
+      <script is:inline defer src={ANALYTICS.vendors.umami.url} data-website-id={ANALYTICS.vendors.umami.id}></script>
     ) : null
   }

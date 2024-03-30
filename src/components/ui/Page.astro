@@ -1,0 +1,13 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+const {
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props
+---
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
+    <slot />
+</WidgetWrapper>
