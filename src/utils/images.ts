@@ -5,7 +5,9 @@ import type { OpenGraph } from '@astrolib/seo';
 const load = async function () {
   let images: Record<string, () => Promise<unknown>> | undefined = undefined;
   try {
-    images = import.meta.glob('~/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}');
+    images = import.meta.glob(
+      '~/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}'
+    );
   } catch (e) {
     // continue regardless of error
   }
@@ -66,7 +68,7 @@ export const adaptOpenGraphImages = async (
         const resolvedImage = (await findImage(image.url)) as ImageMetadata | undefined;
         if (!resolvedImage) {
           return {
-            url: '',
+            url: ''
           };
         }
 
@@ -74,23 +76,25 @@ export const adaptOpenGraphImages = async (
           src: resolvedImage,
           alt: 'Placeholder alt',
           width: image?.width || defaultWidth,
-          height: image?.height || defaultHeight,
+          height: image?.height || defaultHeight
         });
-
         if (typeof _image === 'object') {
           return {
-            url: 'src' in _image && typeof _image.src === 'string' ? String(new URL(_image.src, astroSite)) : 'pepe',
-            width: 'width' in _image && typeof _image.width === 'number' ? _image.width : undefined,
-            height: 'height' in _image && typeof _image.height === 'number' ? _image.height : undefined,
+            url:
+              'src' in _image && typeof _image.src === 'string'
+                ? String(new URL(_image.src, astroSite))
+                : 'pepe',
+            width: 'width' in _image?.attributes && typeof _image.attributes.width === 'number' ? _image.attributes.width : undefined,
+            height: 'height' in _image?.attributes && typeof _image.attributes.height === 'number' ? _image.attributes.height : undefined
           };
         }
         return {
-          url: '',
+          url: ''
         };
       }
 
       return {
-        url: '',
+        url: ''
       };
     })
   );

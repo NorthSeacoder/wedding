@@ -42,6 +42,7 @@
         "@types/lodash.merge": "^4.6.9",
         "astro-icon": "^1.1.0",
         "limax": "^4.1.0",
+        "sharp": "^0.33.3",
         "unpic": "^3.18.0"
     }
 }
