@@ -74,47 +74,49 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
 <AstroSeo {...{...seoProps, openGraph: og}} />
 <script is:inline src='https://res.wx.qq.com/open/js/jweixin-1.6.0.js'></script>
 <script is:inline>
-    const config = await fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig&url=https://wedding.mengpeng.tech/');
-    const configData = await config.json();
+    // const config = await fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig?url=https://wedding.mengpeng.tech/');
+    // const configData = await config.json();
 
+    fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig?url=https://wedding.mengpeng.tech/')
+        .then((res) => res.json())
+        .then((configData) => {
+            //微信分享
+            if (wx) {
+                wx.config({
+                    debug: false,
+                    appId: configData.appId,
+                    timestamp: configData.timestamp,
+                    nonceStr: configData.nonceStr,
+                    signature: configData.signature,
+                    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
+                });
+                wx.ready(function () {
+                    wx.updateAppMessageShareData({
+                        title: '分享标题', // 分享标题
+                        desc: '分享描述', // 分享描述
+                        link: 'https://wedding.mengpeng.tech', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: '~/assets/images/default.jpg', // 分享图标
+                        success: function () {
+                            // 设置成功
+                            umami.track('share-wechat');
+                        }
+                    });
+                    wx.updateTimelineShareData({
+                        title: '分享标题-朋友圈', // 分享标题
+                        link: 'https://wedding.mengpeng.tech', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: '~/assets/images/default.jpg', // 分享图标
+                        success: function () {
+                            // 设置成功
+                            umami.track('share-wechat-timeline');
+                        }
+                    });
+                });
+
+                wx.error(function (res) {
+                    console.log(res);
+                    umami.track('share-wechat-timeline-error', res);
+                });
+            }
+        });
     console.log(configData);
-
-    
-    //微信分享
-    if (wx) {
-        wx.config({
-            debug: false,
-            appId: configData.appId,
-            timestamp: configData.timestamp,
-            nonceStr: configData.nonceStr,
-            signature: configData.signature,
-            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
-        });
-        wx.ready(function () {
-            wx.updateAppMessageShareData({
-                title: '分享标题', // 分享标题
-                desc: '分享描述', // 分享描述
-                link: 'https://wedding.mengpeng.tech', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: '~/assets/images/default.jpg', // 分享图标
-                success: function () {
-                    // 设置成功
-                    umami.track('share-wechat');
-                }
-            });
-            wx.updateTimelineShareData({
-                title: '分享标题-朋友圈', // 分享标题
-                link: 'https://wedding.mengpeng.tech', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: '~/assets/images/default.jpg', // 分享图标
-                success: function () {
-                    // 设置成功
-                    umami.track('share-wechat-timeline');
-                }
-            });
-        });
-
-        wx.error(function (res) {
-            console.log(res);
-            umami.track('share-wechat-timeline-error', res);
-        });
-    }
 </script>
