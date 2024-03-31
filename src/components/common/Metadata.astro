@@ -1,70 +1,120 @@
 ---
 import merge from 'lodash.merge';
-import { AstroSeo } from '@astrolib/seo';
+import {AstroSeo} from '@astrolib/seo';
 
-import type { Props as AstroSeoProps } from '@astrolib/seo';
+import type {Props as AstroSeoProps} from '@astrolib/seo';
 
-import { SITE, METADATA, I18N } from '~/utils/config';
-import type { MetaData } from '~/types';
-import { getCanonical } from '~/utils/permalinks';
+import {SITE, METADATA, I18N} from '~/utils/config';
+import type {MetaData} from '~/types';
+import {getCanonical} from '~/utils/permalinks';
 
-import { adaptOpenGraphImages } from '~/utils/images';
+import {adaptOpenGraphImages} from '~/utils/images';
 
 export interface Props extends MetaData {
-  dontUseTitleTemplate?: boolean;
+    dontUseTitleTemplate?: boolean;
 }
 
 const {
-  title,
-  ignoreTitleTemplate = false,
-  canonical = String(getCanonical(String(Astro.url.pathname))),
-  robots = {},
-  description,
-  openGraph = {},
-  twitter = {},
+    title,
+    ignoreTitleTemplate = false,
+    canonical = String(getCanonical(String(Astro.url.pathname))),
+    robots = {},
+    description,
+    openGraph = {},
+    twitter = {}
 } = Astro.props;
 
 const seoProps: AstroSeoProps = merge(
-  {
-    title: '',
-    titleTemplate: '%s',
-    canonical: canonical,
-    noindex: true,
-    nofollow: true,
-    description: undefined,
-    openGraph: {
-      url: canonical,
-      site_name: SITE?.name,
-      images: [],
-      locale: I18N?.language || 'en',
-      type: 'website',
+    {
+        title: '',
+        titleTemplate: '%s',
+        canonical: canonical,
+        noindex: true,
+        nofollow: true,
+        description: undefined,
+        openGraph: {
+            url: canonical,
+            site_name: SITE?.name,
+            images: [],
+            locale: I18N?.language || 'en',
+            type: 'website'
+        },
+        twitter: {
+            cardType: openGraph?.images?.length ? 'summary_large_image' : 'summary'
+        }
     },
-    twitter: {
-      cardType: openGraph?.images?.length ? 'summary_large_image' : 'summary',
+    {
+        title: METADATA?.title?.default,
+        titleTemplate: METADATA?.title?.template,
+        noindex: typeof METADATA?.robots?.index !== 'undefined' ? !METADATA.robots.index : undefined,
+        nofollow: typeof METADATA?.robots?.follow !== 'undefined' ? !METADATA.robots.follow : undefined,
+        description: METADATA?.description,
+        openGraph: METADATA?.openGraph,
+        twitter: METADATA?.twitter
     },
-  },
-  {
-    title: METADATA?.title?.default,
-    titleTemplate: METADATA?.title?.template,
-    noindex: typeof METADATA?.robots?.index !== 'undefined' ? !METADATA.robots.index : undefined,
-    nofollow: typeof METADATA?.robots?.follow !== 'undefined' ? !METADATA.robots.follow : undefined,
-    description: METADATA?.description,
-    openGraph: METADATA?.openGraph,
-    twitter: METADATA?.twitter,
-  },
-  {
-    title: title,
-    titleTemplate: ignoreTitleTemplate ? '%s' : undefined,
-    canonical: canonical,
-    noindex: typeof robots?.index !== 'undefined' ? !robots.index : undefined,
-    nofollow: typeof robots?.follow !== 'undefined' ? !robots.follow : undefined,
-    description: description,
-    openGraph: { url: canonical, ...openGraph },
-    twitter: twitter,
-  }
+    {
+        title: title,
+        titleTemplate: ignoreTitleTemplate ? '%s' : undefined,
+        canonical: canonical,
+        noindex: typeof robots?.index !== 'undefined' ? !robots.index : undefined,
+        nofollow: typeof robots?.follow !== 'undefined' ? !robots.follow : undefined,
+        description: description,
+        openGraph: {url: canonical, ...openGraph},
+        twitter: twitter
+    }
 );
-const res = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site)
-console.log(res)
+
+// const config = await fetch('127.0.0.1:9111/wx-share/getJsSdkConfig');
+// const config = await fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig');
+
+// console.log(config)
+const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
 ---
 
-<AstroSeo {...{ ...seoProps, openGraph: await adaptOpenGraphImages(seoProps?.openGraph, Astro.site) }} />
+<AstroSeo {...{...seoProps, openGraph: og}} />
+<script src='https://res.wx.qq.com/open/js/jweixin-1.6.0.js'></script>
+<script>
+    const config = await fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig');
+    const configData = await config.json();
+
+    console.log(configData);
+
+    
+    //微信分享
+    if (wx) {
+        wx.config({
+            debug: false,
+            appId: configData.appId,
+            timestamp: configData.timestamp,
+            nonceStr: configData.nonceStr,
+            signature: configData.signature,
+            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
+        });
+        wx.ready(function () {
+            wx.updateAppMessageShareData({
+                title: '分享标题', // 分享标题
+                desc: '分享描述', // 分享描述
+                link: 'https://wedding.mengpeng.tech', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '~/assets/images/default.jpg', // 分享图标
+                success: function () {
+                    // 设置成功
+                    umami.track('share-wechat');
+                }
+            });
+            wx.updateTimelineShareData({
+                title: '分享标题-朋友圈', // 分享标题
+                link: 'https://wedding.mengpeng.tech', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: '~/assets/images/default.jpg', // 分享图标
+                success: function () {
+                    // 设置成功
+                    umami.track('share-wechat-timeline');
+                }
+            });
+        });
+
+        wx.error(function (res) {
+            console.log(res);
+            umami.track('share-wechat-timeline-error', res);
+        });
+    }
+</script>
