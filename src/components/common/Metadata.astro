@@ -72,8 +72,8 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
 ---
 
 <AstroSeo {...{...seoProps, openGraph: og}} />
-<script src='https://res.wx.qq.com/open/js/jweixin-1.6.0.js'></script>
-<script>
+<script is:inline src='https://res.wx.qq.com/open/js/jweixin-1.6.0.js'></script>
+<script is:inline>
     const config = await fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig&url=https://wedding.mengpeng.tech/');
     const configData = await config.json();
 
