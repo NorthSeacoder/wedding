@@ -77,7 +77,7 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
     // const config = await fetch('http://60.205.14.42:9111/wx-share/getJsSdkConfig?url=https://wedding.mengpeng.tech/');
     // const configData = await config.json();
 
-    fetch('127.0.0.1:9111/wx-share/getJsSdkConfig?url=wedding.mengpeng.tech/')
+    fetch('https://api.mengpeng.tech/wx-share/getJsSdkConfig?url=wedding.mengpeng.tech/')
         .then((res) => res.json())
         .then((configData) => {
             //微信分享
