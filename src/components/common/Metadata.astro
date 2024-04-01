@@ -80,10 +80,12 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
     fetch('https://api.mengpeng.tech/wx-share/getJsSdkConfig?url=https://wedding.mengpeng.tech/')
         .then((res) => res.json())
         .then((configData) => {
+            console.log(configData);
+            umami.track('fetch', configData);
             //微信分享
             if (wx) {
                 wx.config({
-                    debug: false,
+                    debug: true,
                     appId: configData.appId,
                     timestamp: configData.timestamp,
                     nonceStr: configData.nonceStr,
@@ -113,8 +115,7 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
                 });
 
                 wx.error(function (res) {
-                    console.log(res);
-                    umami.track('share-wechat-timeline-error', res);
+                    umami.track('share-wechat-error', res);
                 });
             }
         });
