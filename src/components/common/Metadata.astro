@@ -81,7 +81,7 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
         .then((res) => res.json())
         .then((configData) => {
             console.log(configData);
-            umami.track('fetch', configData,wx);
+            umami.track('fetch', configData, wx);
             //微信分享
             if (wx) {
                 wx.config({
@@ -91,6 +91,12 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
                     nonceStr: configData.nonceStr,
                     signature: configData.signature,
                     jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
+                });
+                wx.checkJsApi({
+                    jsApiList: ['updateAppMessageShareData,updateTimelineShareData'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    success: function (res) {
+                        umami.track('checkJsApi',res);
+                    }
                 });
                 wx.ready(function () {
                     wx.updateAppMessageShareData({
