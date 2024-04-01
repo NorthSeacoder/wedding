@@ -81,7 +81,7 @@ const og = await adaptOpenGraphImages(seoProps?.openGraph, Astro.site);
         .then((res) => res.json())
         .then((configData) => {
             console.log(configData);
-            umami.track('fetch', configData);
+            umami.track('fetch', configData,wx);
             //微信分享
             if (wx) {
                 wx.config({
