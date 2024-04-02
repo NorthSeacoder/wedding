@@ -9,41 +9,53 @@ import Analytics from '~/components/common/Analytics.astro';
 import CommonMeta from '~/components/common/CommonMeta.astro';
 import Metadata from '~/components/common/Metadata.astro';
 
-import { I18N } from '~/utils/config';
+import {I18N} from '~/utils/config';
 
-import type { MetaData as MetaDataType } from '~/types';
+import type {MetaData as MetaDataType} from '~/types';
 
 export interface Props {
-  metadata?: MetaDataType;
+    metadata?: MetaDataType;
 }
 
-const { metadata = {} } = Astro.props;
+const {metadata = {}} = Astro.props;
 
-const { language, textDirection } = I18N;
+const {language, textDirection} = I18N;
+// import {findImage} from '~/utils/images';
+// const image = (await findImage('~/assets/images/default.jpg')) as ImageMetadata | undefined;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class="2xl:text-[20px]">
-  <head>
-    <CommonMeta />
-    <Favicons />
-    <CustomStyles />
-    <ApplyColorMode />
-    <Analytics />
-    <Metadata {...metadata} />
+<html lang={language} dir={textDirection} class='2xl:text-[20px]'>
+    <head>
+        <CommonMeta />
+        <Favicons />
+        <CustomStyles />
+        <ApplyColorMode />
+        <Analytics />
+        <Metadata {...metadata} />
 
-    <!-- Uncomment line below to activate View Transitions -->
-    <!-- <ViewTransitions fallback="swap" /> -->
-  </head>
+        <!-- Uncomment line below to activate View Transitions -->
+        <!-- <ViewTransitions fallback="swap" /> -->
+    </head>
 
-  <body class="antialiased text-default bg-page tracking-tight">
-    <slot />
+    <body class='antialiased text-default bg-page tracking-tight'>
+        <!-- {
+            !image ? null : (
+                <div class='shareimg'>
+                    <img src={image.src} />
+                </div>
+            )
+        } -->
+        <slot />
 
-    <BasicScripts />
-    <style is:global>
-      img {
-        content-visibility: auto;
-      }
-    </style>
-  </body>
+        <BasicScripts />
+        <style is:global>
+            .shareimg {
+                display: none;
+            }
+            img {
+                content-visibility: auto;
+            }
+        </style>
+    </body>
 </html>
