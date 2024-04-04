@@ -2,6 +2,7 @@
 import Page from '~/components/ui/Page.astro';
 import Layout from '../layouts/Layout.astro';
 import Steps from '~/components/widgets/Steps.astro';
+import Photos from '~/components/widgets/Photos.astro';
 
 const metadata = {
   title: '我们结婚啦 | 孟鹏 & 曹红宇的婚礼邀请',
@@ -11,7 +12,7 @@ const metadata = {
 
 <Layout metadata={metadata}>
 	<Page id="倒计时"> 倒计时</Page>
-	<Page id="照片墙"> 照片墙</Page>
+	<Page id="照片墙"> <Photos /></Page>
 	<Page id="时间轴">
 		<Steps
 		id="WeddingFlow"
