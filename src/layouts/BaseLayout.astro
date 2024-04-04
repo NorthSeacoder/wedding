@@ -8,11 +8,11 @@ import BasicScripts from '~/components/common/BasicScripts.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import CommonMeta from '~/components/common/CommonMeta.astro';
 import Metadata from '~/components/common/Metadata.astro';
+import Loading from '~/components/widgets/Loading.astro';
 
 import {I18N} from '~/utils/config';
 
 import type {MetaData as MetaDataType} from '~/types';
-
 export interface Props {
     metadata?: MetaDataType;
 }
@@ -22,6 +22,7 @@ const {metadata = {}} = Astro.props;
 const {language, textDirection} = I18N;
 // import {findImage} from '~/utils/images';
 // const image = (await findImage('~/assets/images/default.jpg')) as ImageMetadata | undefined;
+// const posts = await Astro.glob('~/assets/images/**/*');
 ---
 
 <!doctype html>
@@ -46,6 +47,7 @@ const {language, textDirection} = I18N;
                 </div>
             )
         } -->
+        <Loading />
         <slot />
 
         <BasicScripts />

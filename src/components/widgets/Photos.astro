@@ -1,14 +1,27 @@
 ---
 // import { findImage } from '~/utils/images';
 import {getImage} from 'astro:assets';
-const posts = await Astro.glob('~/assets/images/landscape/webp/*');
+import {Picture} from 'astro:assets';
+import img  from '~/assets/images/landscape/001A2158.jpg'
+const posts = await Astro.glob('~/assets/images/landscape/*.jpg');
+const images = [
+    '~/assets/images/landscape/001A2158.jpg',
+    '~/assets/images/landscape/001A2160.jpg',
+    '~/assets/images/landscape/001A2172.jpg',
+    '~/assets/images/landscape/001A2195.jpg',
+    '~/assets/images/landscape/001A2268.jpg',
+    '~/assets/images/landscape/001A2279.jpg',
+    '~/assets/images/landscape/001A2387.jpg',
+    '~/assets/images/landscape/001A2396.jpg',
+    '~/assets/images/landscape/001A2523.jpg',
+    '~/assets/images/landscape/001A2612.jpg'
+];
 // const urls = [
 
 //     '~/assets/images/hor/001A2158.JPG'
 //     ]
 
 // const images = await Promise.all(urls.map(findImage));
-// console.log('images', posts);
 ---
 
 <div class=''>
@@ -19,9 +32,9 @@ const posts = await Astro.glob('~/assets/images/landscape/webp/*');
     </ul> -->
     <div class='slider'>
         {
-            posts.map(({default: {src}}) => (
+            posts.map((post) => (
                 <div class='item'>
-                    <img src={src} alt='image' />
+                    <Picture src={post.default} formats={['webp']}  alt='image' />
                 </div>
             ))
         }
