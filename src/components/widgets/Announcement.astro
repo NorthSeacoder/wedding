@@ -1,0 +1,26 @@
+---
+import {Picture} from 'astro:assets';
+import img from '~/assets/images/portrait/001A2579.jpg';
+
+import PageHeart from './PageHeart.astro'
+// import Typography from './Typography.astro'
+---
+
+<div class='relative text-slate-300 h-[100vh] flex flex-col items-center justify-between p-4'>
+    <PageHeart />
+    <div class="text-red-800 font-title text-6xl">我们的婚礼</div>
+    <div class="bg-red-800 text-slate-50 px-3 font-serif w-full text-center mb-2">welcome to our wedding</div>
+    <div class='text-red-800  text-xs font-mono'>愿有岁月可回首,且以深情共白头</div>
+    
+    <div class='p-2 flex items-center justify-center bg-red-800'>
+        <Picture src={img} formats={['webp']} alt='背景图' />
+    </div>
+    <div class='absolute top-1/2 left-8 -translate-y-2/4'>
+        <h2 class='font-serif font-bold text-4xl mb-6 border-b-2 border-red-600'>婚礼<br />邀请</h2>
+        <div class='font-light'>
+            <div>孟鹏</div>
+            <div>&</div>
+            <div>曹红宇</div>
+        </div>
+    </div>
+</div>

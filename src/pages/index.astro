@@ -3,35 +3,36 @@ import Page from '~/components/ui/Page.astro';
 import Layout from '../layouts/Layout.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Photos from '~/components/widgets/Photos.astro';
+import Announcement from '~/components/widgets/Announcement.astro';
 
 const metadata = {
-  title: '我们结婚啦 | 孟鹏 & 曹红宇的婚礼邀请',
-  ignoreTitleTemplate: true,
+    title: '我们结婚啦 | 孟鹏 & 曹红宇的婚礼邀请',
+    ignoreTitleTemplate: true
 };
 ---
 
 <Layout metadata={metadata}>
-	<Page id="倒计时"> 倒计时</Page>
-	<Page id="照片墙"> <Photos /></Page>
-	<Page id="时间轴">
-		<Steps
-		id="WeddingFlow"
-		title="婚礼流程"
-		items={[
-		  {
-			title:
-			  '筹备中 <br /> <span class="font-normal">北京/徐州</span> <br /> <span class="text-sm font-normal">现在 - 2024年 5 月 1 日</span>',
-			icon: 'tabler:briefcase',
-		  },
-		  {
-			title:
-			  '婚礼开始 <br /> <span class="font-normal">开源名都-怡园厅</span> <br /> <span class="text-sm font-normal">2024年 5 月 2 日 11:38:00</span>',
-			icon: 'tabler:briefcase',
-		  }
-		]}
-		classes={{ container: 'max-w-3xl' }}
-	  />
-	</Page>
-	<Page id="form"> form</Page>
+    <Page id='announcement' slot='announcement' classes={{container: '!p-0'}}>
+        <Announcement />
+    </Page>
+    <Page id='倒计时'> 倒计时</Page>
+    <Page id='照片墙'> <Photos /></Page>
+    <Page id='时间轴'>
+        <Steps
+            id='WeddingFlow'
+            title='婚礼流程'
+            items={[
+                {
+                    title: '筹备中 <br /> <span class="font-normal">北京/徐州</span> <br /> <span class="text-sm font-normal">现在 - 2024年 5 月 1 日</span>',
+                    icon: 'tabler:briefcase'
+                },
+                {
+                    title: '婚礼开始 <br /> <span class="font-normal">开源名都-怡园厅</span> <br /> <span class="text-sm font-normal">2024年 5 月 2 日 11:38:00</span>',
+                    icon: 'tabler:briefcase'
+                }
+            ]}
+            classes={{container: 'max-w-3xl'}}
+        />
+    </Page>
+    <Page id='form'> form</Page>
 </Layout>
-
