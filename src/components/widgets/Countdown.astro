@@ -1,6 +1,6 @@
 ---
-// Countdown.astro
-const { date } = Astro.props;
+import { Icon } from "astro-icon/components";
+const {date} = Astro.props;
 const targetDate = new Date(date);
 const currentDate = new Date();
 const difference = targetDate.getTime() - currentDate.getTime();
@@ -9,14 +9,26 @@ const difference = targetDate.getTime() - currentDate.getTime();
 const daysLeft = Math.max(0, Math.ceil(difference / (1000 * 60 * 60 * 24)));
 
 function formatCountdown(days) {
-  if (days === 0) {
-    return "今日大喜!";
-  } else {
-    return `距离婚礼还有${days}天`;
-  }
+    if (days === 0) {
+        return '今日大喜!';
+    } else {
+        return `距离婚礼还有 ${days}天`;
+    }
 }
 ---
 
 <div>
-  <p>{formatCountdown(daysLeft)}</p>
+    {
+        daysLeft === 0 ? (
+            <p>今日大喜!</p>
+        ) : (
+            <p class="font-serif font-bold text-lg">
+                距离婚礼还有<span class='text-red-500'>{daysLeft}</span>天
+                <Icon
+                      name='tabler:alarm'
+                      class="w-6 h-6 text-red-500 inline-block"
+                    />
+            </p>
+        )
+    }
 </div>
