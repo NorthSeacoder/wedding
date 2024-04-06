@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Photos from '~/components/widgets/Photos.astro';
 import Announcement from '~/components/widgets/Announcement.astro';
+import Calendar from '~/components/widgets/Calendar.astro';
 
 const metadata = {
     title: '我们结婚啦 | 孟鹏 & 曹红宇的婚礼邀请',
@@ -15,6 +16,7 @@ const metadata = {
     <Page id='announcement' slot='announcement' classes={{container: '!p-0'}}>
         <Announcement />
     </Page>
+    <Page id='日历'> <Calendar /></Page>
     <Page id='倒计时'> 倒计时</Page>
     <Page id='照片墙'> <Photos /></Page>
     <Page id='时间轴'>

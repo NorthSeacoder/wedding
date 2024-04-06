@@ -1,7 +1,10 @@
 ---
 import { SITE } from '~/utils/config';
+import {Picture} from 'astro:assets';
+import img from '~/assets/images/logo.jpg';
 ---
 
-<span class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
-  🚀 {SITE?.name}
+<span class="flex items-center gap-2 self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
+  <Picture src={img} class=' w-14 object-contain' formats={['webp']} alt='背景图' />
+  <!-- {SITE?.name} -->
 </span>
