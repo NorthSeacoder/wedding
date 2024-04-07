@@ -2,7 +2,7 @@
 import Page from '~/components/ui/Page.astro';
 import Layout from '../layouts/Layout.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Photos from '~/components/widgets/Photos.astro';
+// import Photos from '~/components/widgets/Photos.astro';
 import Announcement from '~/components/widgets/Announcement.astro';
 import Calendar from '~/components/widgets/Calendar.astro';
 
@@ -17,9 +17,8 @@ const metadata = {
         <Announcement />
     </Page>
     <Page id='日历'> <Calendar /></Page>
-    <Page id='倒计时'> 倒计时</Page>
-    <Page id='照片墙'> <Photos /></Page>
-    <Page id='时间轴'>
+    <!-- <Page id='照片墙'> <Photos /></Page> -->
+    <!-- <Page id='时间轴'>
         <Steps
             id='WeddingFlow'
             title='婚礼流程'
@@ -36,5 +35,5 @@ const metadata = {
             classes={{container: 'max-w-3xl'}}
         />
     </Page>
-    <Page id='form'> form</Page>
+    <Page id='form'> form</Page> -->
 </Layout>

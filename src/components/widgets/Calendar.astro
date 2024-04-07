@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import {Picture} from 'astro:assets';
 import img from '~/assets/images/landscape/001A2279.jpg';
+import location from '~/assets/images/location.jpg';
 // Astro组件脚本部分
 const year = 2024;
 const month = 4; // JavaScript中月份是从0开始的，所以5月份是4
@@ -48,11 +49,12 @@ const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
             }
         </div>
     </div>
-    <div class="my-4 w-full text-slate-50 font-serif font-bold flex justify-center gap-1">
+    <div class="mt-4 mb-2 w-full text-slate-50 font-serif font-bold flex justify-center gap-1">
 
         <Icon name='tabler:map-2' class='w-6 h-6 inline-block' />
         <span>徐州市 开元名都·怡园</span>
     </div>
+    <Picture src={location} formats={['webp']} alt='背景图' />
 </div>
 
 <style>

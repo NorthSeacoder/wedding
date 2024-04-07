@@ -1,8 +1,5 @@
 ---
-// import { findImage } from '~/utils/images';
-import {getImage} from 'astro:assets';
 import {Picture} from 'astro:assets';
-import img  from '~/assets/images/landscape/001A2158.jpg'
 const posts = await Astro.glob('~/assets/images/landscape/*.jpg');
 const images = [
     '~/assets/images/landscape/001A2158.jpg',
@@ -30,189 +27,26 @@ const images = [
             <li class='item' style={{backgroundImage: `url(${src})`}}></li>
         ))}
     </ul> -->
-    <div class='slider'>
-        {
-            posts.map((post) => (
-                <div class='item'>
-                    <Picture src={post.default} formats={['webp']}  alt='image' />
-                </div>
-            ))
-        }
-    </div>
-
-    <nav class='nav'>
-        <span class='btn prev'>prev</span>
-
-        <span class='btn next'>next</span>
-    </nav>
+    photos
 </div>
 
 <script>
-    const slider = document.querySelector('.slider');
+    // import {gsap} from 'gsap';
+    // import {ScrollTrigger} from 'gsap/ScrollTrigger';
+    // import Lenis from '@studio-freight/lenis';
+    // gsap.registerPlugin(ScrollTrigger);
+    // const lenis = new Lenis();
 
-    function activate(e) {
-        const items = document.querySelectorAll('.item');
-        e.target.matches('.next') && slider?.append(items[0]);
-        e.target.matches('.prev') && slider?.prepend(items[items.length - 1]);
-    }
+    // lenis.on('scroll', (e) => {
+    //     console.log(e);
+    // });
 
-    document.addEventListener('click', activate, false);
+    // function raf(time) {
+    //     lenis.raf(time);
+    //     requestAnimationFrame(raf);
+    // }
+
+    // requestAnimationFrame(raf);
 </script>
 
-<style>
-    .item {
-        width: 200px;
-        height: 300px;
-        /* list-style-type: none; */
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1;
-        /* background-position: center; */
-        /* background-size: cover; */
-        border-radius: 20px;
-        box-shadow: 0 20px 30px rgba(255, 255, 255, 0.3) inset;
-        transition:
-            transform 0.1s,
-            left 0.75s,
-            top 0.75s,
-            width 0.75s,
-            height 0.75s;
-
-        &:nth-child(1),
-        &:nth-child(2) {
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            transform: none;
-            border-radius: 0;
-            box-shadow: none;
-            opacity: 1;
-            border-radius: 4px;
-        }
-        .item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* 使用contain而不是cover */
-            border-radius: 20px;
-        }
-
-        &:nth-child(3) {
-            left: 50%;
-        }
-        &:nth-child(4) {
-            left: calc(50% + 220px);
-        }
-        &:nth-child(5) {
-            left: calc(50% + 440px);
-        }
-        &:nth-child(6) {
-            left: calc(50% + 660px);
-            opacity: 0;
-        }
-    }
-
-    .item:nth-of-type(2) .content {
-        display: block;
-        animation: show 0.75s ease-in-out 0.3s forwards;
-    }
-
-    @keyframes show {
-        0% {
-            filter: blur(5px);
-            transform: translateY(calc(-50% + 75px));
-        }
-        100% {
-            opacity: 1;
-            filter: blur(0);
-        }
-    }
-
-    .nav {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 5;
-        user-select: none;
-
-        & .btn {
-            background-color: rgba(255, 255, 255, 0.5);
-            color: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(0, 0, 0, 0.6);
-            margin: 0 0.25rem;
-            padding: 0.75rem;
-            border-radius: 50%;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.3);
-            }
-        }
-    }
-
-    @media (width > 650px) and (width < 900px) {
-        .content {
-            & .title {
-                font-size: 1rem;
-            }
-            & .description {
-                font-size: 0.7rem;
-            }
-            & button {
-                font-size: 0.7rem;
-            }
-        }
-        .item {
-            width: 160px;
-            height: 270px;
-
-            &:nth-child(3) {
-                left: 50%;
-            }
-            &:nth-child(4) {
-                left: calc(50% + 170px);
-            }
-            &:nth-child(5) {
-                left: calc(50% + 340px);
-            }
-            &:nth-child(6) {
-                left: calc(50% + 510px);
-                opacity: 0;
-            }
-        }
-    }
-
-    @media (width < 650px) {
-        .content {
-            & .title {
-                font-size: 0.9rem;
-            }
-            & .description {
-                font-size: 0.65rem;
-            }
-            & button {
-                font-size: 0.7rem;
-            }
-        }
-        .item {
-            width: 130px;
-            height: 220px;
-
-            &:nth-child(3) {
-                left: 50%;
-            }
-            &:nth-child(4) {
-                left: calc(50% + 140px);
-            }
-            &:nth-child(5) {
-                left: calc(50% + 280px);
-            }
-            &:nth-child(6) {
-                left: calc(50% + 420px);
-                opacity: 0;
-            }
-        }
-    }
-</style>
+<style></style>

@@ -13,6 +13,9 @@ dependencies:
   '@fontsource-variable/inter':
     specifier: ^5.0.17
     version: 5.0.17
+  '@studio-freight/lenis':
+    specifier: ^1.0.42
+    version: 1.0.42
   '@types/js-yaml':
     specifier: ^4.0.9
     version: 4.0.9
@@ -1184,6 +1187,10 @@ packages:
 
   /@shikijs/core@1.2.0:
     resolution: {integrity: sha512-OlFvx+nyr5C8zpcMBnSGir0YPD6K11uYhouqhNmm1qLiis4GA7SsGtu07r9gKS9omks8RtQqHrJL4S+lqWK01A==}
+
+  /@studio-freight/lenis@1.0.42:
+    resolution: {integrity: sha512-HJAGf2DeM+BTvKzHv752z6Z7zy6bA643nZM7W88Ft9tnw2GsJSp6iJ+3cekjyMIWH+cloL2U9X82dKXgdU8kPg==}
+    dev: false
 
   /@tailwindcss/typography@0.5.12(tailwindcss@3.4.1):
     resolution: {integrity: sha512-CNwpBpconcP7ppxmuq3qvaCxiRWnbhANpY/ruH4L5qs2GCiVDJXde/pjj2HWPV1+Q4G9+V/etrwUYopdcjAlyg==}
