@@ -1,69 +1,77 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
+    push:
+        branches: [main]
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      cache-hit: ${{ steps.cache-npm.outputs.cache-hit }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-      
-      # 使用 Cache 来存储和恢复 npm 依赖项
-      - name: Cache npm dependencies
-        id: cache-npm
-        uses: actions/cache@v3.3.2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          
-      - name: Install npm dependencies
-        if: steps.cache-npm.outputs.cache-hit != 'true'
-        run: npm install
+    setup:
+        runs-on: ubuntu-latest
+        outputs:
+            cache-hit: ${{ steps.cache-pnpm.outputs.cache-hit }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.1.1
 
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          
-      - name: Install npm dependencies
-        run: npm ci
-        
-      - name: Run build task
-        run: npm run build
-        
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@main
-        with:
-            SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
-            ARGS: '-rlgoDzvc -i --delete'
-            SOURCE: 'dist/'
-            SCRIPT_BEFORE: |
-              whoami
-              ls -al
-            REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
-            REMOTE_USER: 'root'
-            TARGET: '/opt/1panel/apps/openresty/openresty/www/sites/wedding.mengpeng.tech/index/'
-            EXCLUDE: "/dist/, /node_modules/"
+            # 使用 Cache 来存储和恢复 pnpm 依赖项
+            - name: Cache pnpm dependencies
+              id: cache-pnpm
+              uses: actions/cache@v3.3.2
+              with:
+                  path: |
+                      ~/.pnpm-store
+                      **/node_modules
+                  key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-
+
+            - name: Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '18.x'
+
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Install pnpm dependencies
+              if: steps.cache-pnpm.outputs.cache-hit != 'true'
+              run: pnpm install
+
+    build:
+        needs: setup
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '18.x'
+
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Install pnpm dependencies
+              run: pnpm install
+
+            - name: Run build task
+              run: pnpm run build
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to Server
+              uses: easingthemes/ssh-deploy@main
+              with:
+                  SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
+                  ARGS: '-rlgoDzvc -i --delete'
+                  SOURCE: 'dist/'
+                  SCRIPT_BEFORE: |
+                      whoami
+                      ls -al
+                  REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
+                  REMOTE_USER: 'root'
+                  TARGET: '/opt/1panel/apps/openresty/openresty/www/sites/wedding.mengpeng.tech/index/'
+                  EXCLUDE: '/dist/, /node_modules/'
