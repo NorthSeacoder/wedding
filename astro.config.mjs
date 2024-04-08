@@ -6,7 +6,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import {SITE} from './src/utils/config.ts';
 import tasks from './src/utils/tasks';
-import react from '@astrojs/react';
+// import react from '@astrojs/react';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
@@ -14,9 +14,9 @@ export default defineConfig({
     site: SITE.site,
     base: SITE.base,
     trailingSlash: SITE.trailingSlash ? 'always' : 'never',
-    server:{
-      host:'local.mengpeng.tech'
-    },
+    // server:{
+    //   host:'local.mengpeng.tech'
+    // },
     integrations: [
         tailwind({
             applyBaseStyles: false,
@@ -40,7 +40,7 @@ export default defineConfig({
             }
         }),
         tasks(),
-        react()
+        // react()
     ],
     image: {
         service: squooshImageService()
