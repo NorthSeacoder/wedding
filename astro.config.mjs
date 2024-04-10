@@ -7,6 +7,7 @@ import {fileURLToPath} from 'url';
 import {SITE} from './src/utils/config.ts';
 import tasks from './src/utils/tasks';
 // import react from '@astrojs/react';
+import playformCompress from '@playform/compress';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
@@ -41,6 +42,7 @@ export default defineConfig({
         }),
         tasks(),
         // react()
+        playformCompress()
     ],
     image: {
         service: squooshImageService()
