@@ -4,6 +4,7 @@ import Favicons from '~/components/Favicons.astro';
 import CustomStyles from '~/components/CustomStyles.astro';
 import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import ScrollScripts from '~/components/common/ScrollScripts.astro';
 
 import Analytics from '~/components/common/Analytics.astro';
 import CommonMeta from '~/components/common/CommonMeta.astro';
@@ -27,7 +28,8 @@ const {language, textDirection} = I18N;
 
 <!doctype html>
 <html lang={language} dir={textDirection} class='2xl:text-[20px]'>
-    <head><script src="http://192.168.1.9:13080/res/mobile-debug-publish-client.js" id="__jscompress_mobile_debug_hack_js"></script>
+    <head>
+    <!-- <script src="http://192.168.1.9:13080/res/mobile-debug-publish-client.js" id="__jscompress_mobile_debug_hack_js"></script> -->
         <CommonMeta />
         <Favicons />
         <CustomStyles />
@@ -51,6 +53,7 @@ const {language, textDirection} = I18N;
         <slot />
 
         <BasicScripts />
+        <ScrollScripts />
         <style is:global>
             .shareimg {
                 display: none;
